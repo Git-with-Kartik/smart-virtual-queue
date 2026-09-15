@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Join Queue - Smart Virtual Queue</title>
+</head>
+
+<body bgcolor="#F4F7FB">
+
+
+<table width="100%" bgcolor="#12355B" cellpadding="20">
+    <tr>
+        <td>
+            <font color="white" size="6">
+                <b>SMART VIRTUAL QUEUE</b>
+            </font>
+        </td>
+    </tr>
+</table>
+
+<table width="100%" bgcolor="#DCEBFA" cellpadding="15">
+    <tr align="center">
+        <td><a href="{{ url_for('home') }}">Home</a></td>
+        <td><a href="{{ url_for('join_queue') }}">Join Queue</a></td>
+        <td><a href="{{ url_for('queue_status') }}">Queue Status</a></td>
+        <td><a href="{{ url_for('queue_info') }}">Queue Information</a></td>
+        <td><a href="{{ url_for('admin_login') }}">Admin</a></td>
+        <td><a href="{{ url_for('about') }}">About</a></td>
+    </tr>
+</table>
+
+<br>
+
+<center>
+    <h1>Join Virtual Queue</h1>
+    <p>Fill in the following information to join the queue.</p>
+
+    <form action="token.html">
+
+        <table border="1" cellpadding="12" cellspacing="0" width="60%">
+
+            <tr bgcolor="#12355B">
+                <th colspan="2">
+                    <font color="white" size="5">
+                        User Registration
+                    </font>
+                </th>
+            </tr>
+
+            <tr>
+                <td><b>Full Name</b></td>
+                <td>
+                    <input type="text"
+                           name="name"
+                           placeholder="Enter your full name"
+                           required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Mobile Number</b></td>
+                <td>
+                    <input type="tel"
+                           name="mobile"
+                           placeholder="Enter mobile number"
+                           required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Email</b></td>
+                <td>
+                    <input type="email"
+                           name="email"
+                           placeholder="Enter email"
+                           required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Service Required</b></td>
+                <td>
+                    <select name="service" required>
+                        <option value="">-- Select Service --</option>
+                        <option>General Enquiry</option>
+                        <option>Hospital OPD</option>
+                        <option>Local Doctor Appointment</option>
+                        <option>Document Verification</option>
+                        <option>Fee Payment</option>
+                        <option>Admission Help</option>
+                        <option>Certificate Collection</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Number of People</b></td>
+                <td>
+                    <input type="number"
+                           min="1"
+                           max="10"
+                           value="1">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Priority</b></td>
+                <td>
+                    <input type="radio" name="priority" value="normal" checked>
+                    Normal
+                    <br>
+
+                    <input type="radio" name="priority" value="senior">
+                    Senior Citizen
+                    <br>
+
+                    <input type="radio" name="priority" value="emergency">
+                    Emergency
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Preferred Time</b></td>
+                <td>
+                    <input type="time" name="time">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Additional Message</b></td>
+                <td>
+                    <textarea rows="5"
+                              cols="30"
+                              placeholder="Enter any additional information"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit"
+                           value="JOIN QUEUE">
+                    &nbsp;&nbsp;
+                    <input type="reset"
+                           value="CLEAR">
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+
+    <br>
+
+</center>
+
+<br>
+
+<table width="100%" bgcolor="#12355B" cellpadding="15">
+    <tr>
+        <td align="center">
+            <font color="white">
+                © 2026 Smart Virtual Queue System
+            </font>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>

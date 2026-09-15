@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Queue Status - Smart Virtual Queue</title>
+</head>
+<body bgcolor="#F4F7FB">
+<table width="100%" bgcolor="#12355B" cellpadding="20">
+    <tr>
+        <td>
+            <font color="white" size="6">
+                <b>SMART VIRTUAL QUEUE</b>
+            </font>
+        </td>
+    </tr>
+</table>
+<table width="100%" bgcolor="#DCEBFA" cellpadding="15">
+    <tr align="center">
+    <td>
+        <a href="{{ url_for('home') }}">Home</a>
+    </td>
+    <td>
+        <a href="{{ url_for('join_queue') }}">Join Queue</a>
+    </td>
+    <td>
+        <a href="{{ url_for('queue_status') }}">Queue Status</a>
+    </td>
+    <td>
+        <a href="{{ url_for('queue_info') }}">Queue Information</a>
+    </td>
+    <td>
+        <a href="{{ url_for('admin_login') }}">Admin</a>
+    </td>
+    <td>
+        <a href="{{ url_for('about') }}">About</a>
+    </td>
+</tr>
+</table>
+<br>
+<center>
+<h1>Live Queue Status</h1>
+<!-- CURRENT TOKEN -->
+<table width="70%" cellpadding="20" border="1">
+    <tr align="center">
+        <td>
+            <h3>Currently Serving</h3>
+            <font size="6" color="#12355B">
+                <b>{{ current_user['token'] if current_user else 'None' }}</b>
+            </font>
+        </td>
+    </tr>
+</table>
+<br>
+<!-- QUEUE LIST -->
+<h2>Queue List</h2>
+<table width="80%"
+       border="1"
+       cellpadding="12"
+       cellspacing="0">
+
+
+    <tr bgcolor="#12355B">
+        <th>
+            <font color="white">
+                Token
+            </font>
+        </th>
+        <th>
+            <font color="white">
+                Name
+            </font>
+        </th>
+        <th>
+            <font color="white">
+                Service
+            </font>
+        </th>
+        <th>
+            <font color="white">
+                Priority
+            </font>
+        </th>
+        <th>
+            <font color="white">
+                Counter
+            </font>
+        </th>
+        <th>
+            <font color="white">
+                Status
+            </font>
+        </th>
+
+    </tr>
+    {% for user in users %}
+    <tr align="center">
+        <td>
+            <b>
+                {{ user['token'] }}
+            </b>
+        </td>
+        <td>
+            {{ user['name'] }}
+        </td>
+        <td>
+            {{ user['service'] }}
+        </td>
+        <td>
+            {{ user['priority'] }}
+        </td>
+        <td>
+            {{ user['counter'] }}
+        </td>
+        <td>
+            <b>
+                {{ user['status'] }}
+            </b>
+        </td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="6" align="center">
+            No users have joined the queue yet.
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<a href="{{ url_for('join_queue') }}">
+    <button type="button">
+        Join Queue
+    </button>
+</a>
+</center>
+<br>
+<table width="100%" bgcolor="#12355B" cellpadding="15">
+    <tr>
+        <td align="center">
+            <font color="white">
+                © 2026 Smart Virtual Queue System
+            </font>
+         </td>
+    </tr>
+</table>
+</body>
+</html>

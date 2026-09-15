@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Admin Dashboard - Smart Virtual Queue</title>
+</head>
+
+<body bgcolor="#F4F7FB">
+
+
+<table width="100%" bgcolor="#12355B" cellpadding="20">
+    <tr>
+        <td>
+            <font color="white" size="6">
+                <b>ADMIN DASHBOARD</b>
+            </font>
+        </td>
+    </tr>
+</table>
+
+<table width="100%" bgcolor="#DCEBFA" cellpadding="15">
+    <tr align="center">
+        <td><a href="{{ url_for('home') }}">Home</a></td>
+        <td><a href="{{ url_for('queue_status') }}">Queue Status</a></td>
+        <td><a href="{{ url_for('queue_info') }}">Queue Information</a></td>
+        <td><a href="{{ url_for('admin') }}">Dashboard</a></td>
+        <td><a href="{{ url_for('about') }}">About</a></td>
+    </tr>
+</table>
+
+<br>
+
+<center>
+
+    <h1>Queue Management Dashboard</h1>
+
+    <table width="85%" cellpadding="15" border="1">
+
+        <tr bgcolor="#12355B">
+
+            <th>
+                <font color="white">Currently Serving</font>
+            </th>
+
+            <th>
+                <font color="white">Next Token</font>
+            </th>
+
+            <th>
+                <font color="white">Waiting Users</font>
+            </th>
+
+            <th>
+                <font color="white">Completed Today</font>
+            </th>
+
+        </tr>
+
+        <tr align="center">
+
+            <td>
+                <font size="5">
+                    <b>{{ current_token }}</b>
+                </font>
+            </td>
+
+            <td>
+                <font size="5">
+                    <b>{{ next_token }}</b>
+                </font>
+            </td>
+
+            <td>
+                <font size="5">
+                    <b>{{ waiting_users }}</b>
+                </font>
+            </td>
+
+            <td>
+                <font size="5">
+                    <b>{{ completed_today }}</b>
+                </font>
+            </td>
+
+        </tr>
+
+    </table>
+
+    <br><br>
+
+    <h2>Queue Management</h2>
+
+    <table width="90%" border="1" cellpadding="12" cellspacing="0">
+
+        <tr bgcolor="#12355B">
+
+            <th><font color="white">Token</font></th>
+            <th><font color="white">Name</font></th>
+            <th><font color="white">Service</font></th>
+            <th><font color="white">Priority</font></th>
+            <th><font color="white">Status</font></th>
+
+        </tr>
+
+        {% for user in users %}
+        <tr align="center">
+            <td>{{ user['token'] }}</td>
+            <td>{{ user['name'] }}</td>
+            <td>{{ user['service'] }}</td>
+            <td>{{ user['priority'] }}</td>
+            <td><font color="green"><b>{{ user['status'] }}</b></font></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" align="center">No users in the queue.</td>
+        </tr>
+        {% endfor %}
+
+    <br><br>
+
+    <table cellpadding="15">
+
+        <tr>
+
+            <td>
+                <form action="{{ url_for('call_next') }}" method="POST">
+                    <button type="submit">
+                        CALL NEXT TOKEN
+                    </button>
+                </form>
+            </td>
+
+            <td>
+                <form action="{{ url_for('complete_token') }}" method="POST">
+                    <button type="submit">
+                        COMPLETE TOKEN
+                    </button>
+                </form>
+            </td>
+
+            <td>
+                <form action="{{ url_for('skip_token') }}" method="POST">
+                    <button type="submit">
+                        SKIP TOKEN
+                    </button>
+                </form>
+            </td>
+
+            <td>
+                <form action="{{ url_for('admin') }}" method="GET">
+                    <button type="submit">
+                        REFRESH QUEUE
+                    </button>
+                </form>
+            </td>
+
+        </tr>
+
+    </table>
+
+    <br>
+</center>
+
+<br>
+
+<table width="100%" bgcolor="#12355B" cellpadding="15">
+    <tr>
+        <td align="center">
+            <font color="white">
+                © 2026 Smart Virtual Queue System
+            </font>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>

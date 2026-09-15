@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Queue Information - Smart Virtual Queue</title>
+</head>
+
+<body bgcolor="#F4F7FB">
+
+
+<table width="100%" bgcolor="#12355B" cellpadding="20">
+    <tr>
+        <td>
+            <font color="white" size="6">
+                <b>SMART VIRTUAL QUEUE</b>
+            </font>
+        </td>
+    </tr>
+</table>
+
+<table width="100%" bgcolor="#DCEBFA" cellpadding="15">
+    <tr align="center">
+        <td><a href="{{ url_for('home') }}">Home</a></td>
+        <td><a href="{{ url_for('join_queue') }}">Join Queue</a></td>
+        <td><a href="{{ url_for('queue_status') }}">Queue Status</a></td>
+        <td><a href="{{ url_for('queue_info') }}">Queue Information</a></td>
+        <td><a href="{{ url_for('admin_login') }}">Admin</a></td>
+        <td><a href="{{ url_for('about') }}">About</a></td>
+    </tr>
+</table>
+
+<br>
+
+<center>
+
+    <h1>Today's Queue Information</h1>
+
+    <table width="80%" border="1" cellpadding="20">
+
+        <tr bgcolor="#12355B">
+
+            <th>
+                <font color="white">Total Tokens</font>
+            </th>
+
+            <th>
+                <font color="white">Waiting</font>
+            </th>
+
+            <th>
+                <font color="white">Completed</font>
+            </th>
+
+            <th>
+                <font color="white">Average Wait</font>
+            </th>
+
+        </tr>
+
+        <tr align="center">
+
+            <td><font size="5"><b>{{ total }}</b></font></td>
+            <td><font size="5"><b>{{ waiting }}</b></font></td>
+            <td><font size="5"><b>{{ completed }}</b></font></td>
+            <td><font size="5"><b>{{ average_wait }} min</b></font></td>
+
+        </tr>
+
+    </table>
+
+    <br><br>
+
+    <h2>Service Counters</h2>
+
+    <table width="75%" border="1" cellpadding="15">
+
+        <tr bgcolor="#12355B">
+            <th><font color="white">Counter</font></th>
+            <th><font color="white">Service</font></th>
+            <th><font color="white">Current Token</font></th>
+            <th><font color="white">Status</font></th>
+        </tr>
+
+     {% for counter in counters %}
+        <tr align="center">
+            <td>{{ counter['counter'] }}</td>
+            <td>{{ counter['service'] }}</td>
+            <td>{{ counter['token'] }}</td>
+            <td>
+                <font color="green">{{ counter['status'] }}</font>
+            </td>
+        </tr>
+     {% endfor %}
+
+    </table>
+
+    <br><br>
+
+    <h2>Priority Queue</h2>
+
+    <table width="70%" border="1" cellpadding="15">
+
+        <tr bgcolor="#12355B">
+            <th><font color="white">Priority Type</font></th>
+            <th><font color="white">Tokens</font></th>
+            <th><font color="white">Status</font></th>
+        </tr>
+
+     {% for user in users %}
+        <tr align="center">
+            <td>{{ user['priority'] }}</td>
+            <td>{{ user['token'] }}</td>
+            <td>{{ user['status'] }}</td>
+        </tr>
+     {% endfor %}
+
+    </table>
+
+    <br><br>
+
+    <h2>Important Instructions</h2>
+
+    <table width="70%" cellpadding="10">
+
+        <tr>
+            <td>1.</td>
+            <td>Keep your token number safe.</td>
+        </tr>
+
+        <tr>
+            <td>2.</td>
+            <td>Check the queue status regularly.</td>
+        </tr>
+
+        <tr>
+            <td>3.</td>
+            <td>Reach the counter when your token is called.</td>
+        </tr>
+
+        <tr>
+            <td>4.</td>
+            <td>Priority users may be served before normal users.</td>
+        </tr>
+
+    </table>
+
+</center>
+
+<br>
+
+<table width="100%" bgcolor="#12355B" cellpadding="15">
+    <tr>
+        <td align="center">
+            <font color="white">
+                © 2026 Smart Virtual Queue System
+            </font>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>
