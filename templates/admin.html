@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - Smart Virtual Queue</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #F4F7FB;
+            color: #243447;
+        }
+
+        header {
+            background: #12355B;
+            color: white;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: #DCEBFA;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #12355B;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #0077CC;
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 94%;
+            max-width: 1400px;
+            margin: 30px auto;
+        }
+
+        h2 {
+            color: #12355B;
+            margin-top: 35px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 24px 15px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-card h3 {
+            margin-top: 0;
+            font-size: 15px;
+            color: #536579;
+        }
+
+        .stat-card p {
+            font-size: 28px;
+            font-weight: bold;
+            color: #12355B;
+            margin-bottom: 0;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-blue {
+            background: #1565C0;
+        }
+
+        .btn-blue:hover {
+            background: #0D47A1;
+        }
+
+        .btn-green {
+            background: #218838;
+        }
+
+        .btn-green:hover {
+            background: #17692A;
+        }
+
+        .btn-orange {
+            background: #E69500;
+        }
+
+        .btn-red {
+            background: #C62828;
+        }
+
+        .btn-gray {
+            background: #526477;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        thead {
+            background: #12355B;
+            color: white;
+        }
+
+        th, td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #E1E7EF;
+            text-align: center;
+        }
+
+        tbody tr:hover {
+            background: #F0F6FC;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .waiting {
+            background: #FFF3CD;
+            color: #856404;
+        }
+
+        .serving {
+            background: #D4EDDA;
+            color: #155724;
+        }
+
+        .completed {
+            background: #DCEBFA;
+            color: #12355B;
+        }
+
+        .skipped {
+            background: #F8D7DA;
+            color: #721C24;
+        }
+
+        .priority {
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .actions form {
+            margin: 0;
+        }
+
+        .empty {
+            padding: 25px;
+            color: #687789;
+        }
+
+        footer {
+            margin-top: 45px;
+            background: #12355B;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        @media (max-width: 850px) {
+            .stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .container {
+                width: 96%;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ADMIN DASHBOARD</h1>
+    <p>Smart Virtual Queue Management System</p>
+</header>
+
+<nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('select_place') }}">Select Place</a>
+    <a href="{{ url_for('queue_status') }}">Queue Status</a>
+    <a href="{{ url_for('queue_info') }}">Queue Information</a>
+    <a href="{{ url_for('admin') }}">Dashboard</a>
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</nav>
+
+<main class="container">
+
+    <h2>Queue Management Dashboard</h2>
+
+    <!-- Dashboard statistics -->
+    <section class="stats">
+
+        <div class="stat-card">
+            <h3>Currently Serving</h3>
+            <p>
+                {% if serving %}
+                    {{ serving['token'] }}
+                {% else %}
+                    —
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Next Token</h3>
+            <p>
+                {% set ns = namespace(next_user=None) %}
+                {% for user in users %}
+                    {% if user['status'] == 'Waiting' and ns.next_user is none %}
+                        {% set ns.next_user = user %}
+                    {% endif %}
+                {% endfor %}
+                {% if ns.next_user %}
+                    {{ ns.next_user['token'] }}
+                {% else %}
+                    —
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Waiting Users</h3>
+            <p>{{ waiting_count }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Completed</h3>
+            <p>{{ completed_count }}</p>
+        </div>
+
+    </section>
+
+    <!-- Excel export and refresh -->
+    <div class="toolbar">
+
+        <h2>Queue Records</h2>
+
+        <div>
+            <a href="{{ url_for('export_excel') }}"
+               class="btn btn-green">
+                &#128190; Export Queue to Excel
+            </a>
+
+            <a href="{{ url_for('admin') }}"
+               class="btn btn-blue">
+                &#8635; Refresh Queue
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Queue table -->
+    <div class="table-wrapper">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Name</th>
+                    <th>Place</th>
+                    <th>Service / Reason</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Counter</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for user in users %}
+
+                <tr>
+                    <td><strong>{{ user['token'] }}</strong></td>
+
+                    <td>{{ user['name'] }}</td>
+
+                    <td>
+                        {{ user['place'] or '—' }}
+                    </td>
+
+                    <td>
+                        {{ user['service'] or user['reason'] or 'General Enquiry' }}
+                    </td>
+
+                    <td class="priority">
+                        {{ user['priority'] or 'Normal' }}
+                    </td>
+
+                    <td>
+                        {% set status = user['status'] or 'Waiting' %}
+
+                        <span class="status
+                            {% if status == 'Waiting' %}waiting
+                            {% elif status == 'Serving' %}serving
+                            {% elif status == 'Completed' %}completed
+                            {% elif status == 'Skipped' %}skipped
+                            {% endif %}">
+                            {{ status }}
+                        </span>
+                    </td>
+
+                    <td>{{ user['counter'] or 'Counter 1' }}</td>
+
+                    <td>{{ user['created_at'] or '—' }}</td>
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="8" class="empty">
+                        No users in the queue yet.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- Queue management buttons -->
+    <h2>Queue Actions</h2>
+
+    <div class="actions">
+
+        <form action="{{ url_for('call_next') }}" method="POST">
+            <button type="submit" class="btn btn-blue">
+                CALL NEXT TOKEN
+            </button>
+        </form>
+
+        {% if serving %}
+
+        <form action="{{ url_for('complete', user_id=serving['id']) }}"
+              method="POST">
+            <button type="submit" class="btn btn-green">
+                COMPLETE CURRENT TOKEN
+            </button>
+        </form>
+
+        <form action="{{ url_for('skip', user_id=serving['id']) }}"
+              method="POST">
+            <button type="submit" class="btn btn-red">
+                SKIP CURRENT TOKEN
+            </button>
+        </form>
+
+        {% else %}
+
+        <button type="button" class="btn btn-gray" disabled>
+            NO TOKEN CURRENTLY SERVING
+        </button>
+
+        {% endif %}
+
+        <a href="{{ url_for('admin') }}" class="btn btn-gray">
+            REFRESH QUEUE
+        </a>
+
+    </div>
+
+    <p>
+        <strong>Note:</strong>
+        Emergency and senior citizen priorities are considered when
+        selecting the next waiting token.
+    </p>
+
+</main>
+
+<footer>
+    &copy; 2026 Smart Virtual Queue System
+</footer>
+
+</body>
+</html>

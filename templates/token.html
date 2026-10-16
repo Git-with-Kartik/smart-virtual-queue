@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Token - Smart Virtual Queue</title>
+
+
+<style>
+    body {
+        margin: 0;
+        background-color: #F4F7FB;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    .header {
+        width: 100%;
+        background-color: #12355B;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .header-title {
+        color: white;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .navbar {
+        width: 100%;
+        background-color: #DCEBFA;
+        padding: 15px 0;
+        text-align: center;
+    }
+
+    .navbar a {
+        color: #12355B;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 0 15px;
+    }
+
+    .navbar a:hover {
+        text-decoration: underline;
+    }
+
+    .container {
+        text-align: center;
+        margin: 40px auto;
+    }
+
+    .token-box {
+        width: 55%;
+        margin: auto;
+        border: 1px solid #999;
+        background-color: white;
+        border-collapse: collapse;
+    }
+
+    .token-header {
+        background-color: #12355B;
+        color: white;
+        padding: 20px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .token-content {
+        padding: 30px;
+    }
+
+    .token-label {
+        font-size: 18px;
+    }
+
+    .token-number {
+        font-size: 55px;
+        color: #12355B;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    .details {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .status {
+        font-weight: bold;
+        color: green;
+    }
+
+    .buttons {
+        margin-top: 30px;
+    }
+
+    .buttons a {
+        text-decoration: none;
+    }
+
+    .buttons button {
+        background-color: #12355B;
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        margin: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+    .buttons button:hover {
+        background-color: #0d2945;
+    }
+
+    .important {
+        margin-top: 25px;
+    }
+
+    .footer {
+        width: 100%;
+        background-color: #12355B;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        box-sizing: border-box;
+        margin-top: 50px;
+    }
+
+    @media (max-width: 768px) {
+        .token-box {
+            width: 90%;
+        }
+
+        .navbar a {
+            display: block;
+            margin: 10px;
+        }
+
+        .header-title {
+            font-size: 25px;
+        }
+    }
+</style>
+
+
+</head>
+
+<body>
+
+
+<!-- Header -->
+<div class="header">
+    <div class="header-title">
+        SMART VIRTUAL QUEUE
+    </div>
+</div>
+
+<!-- Navigation -->
+<div class="navbar">
+    <a href="{{ url_for('home') }}">Home</a>
+    <td><a href="{{ url_for('select_place') }}">Select Place</a></td>
+    <a href="{{ url_for('join_queue') }}">Join Queue</a>
+    <a href="{{ url_for('queue_status') }}">Queue Status</a>
+    <a href="{{ url_for('queue_info') }}">Queue Information</a>
+    <a href="{{ url_for('admin_login') }}">Admin</a>
+    <a href="{{ url_for('about') }}">About</a>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+
+    <h1>Your Virtual Queue Token</h1>
+
+    <table class="token-box">
+        <tr>
+            <td class="token-header">
+                TOKEN GENERATED
+            </td>
+        </tr>
+
+        <tr>
+            <td class="token-content">
+
+                <p class="token-label">
+                    Your Token Number
+                </p>
+
+                <div class="token-number">
+                    {{ user['token'] }}
+                </div>
+
+                <hr>
+
+                <div class="details">
+
+                    <p>
+                        <b>Name:</b>
+                        {{ user['name'] }}
+                    </p>
+
+                    <p>
+                        <b>Service:</b>
+                        {{ user['service'] }}
+                    </p>
+
+                    <p>
+                        <b>Counter:</b>
+                        {{ user['counter'] }}
+                    </p>
+
+                    <p>
+                        <b>Current Token:</b>
+                        {{ current_token }}
+                    </p>
+
+                    <p>
+                        <b>People Ahead:</b>
+                        {{ people_ahead }}
+                    </p>
+
+                    <p>
+                        <b>Estimated Waiting Time:</b>
+                        {{ waiting_time }} minutes
+                    </p>
+
+                    <p>
+                        <b>Priority:</b>
+                        {{ user['priority'] }}
+                    </p>
+
+                    <p>
+                        <b>Status:</b>
+                        <span class="status">
+                            {{ user['status'] }}
+                        </span>
+                    </p>
+
+                </div>
+
+            </td>
+        </tr>
+    </table>
+
+    <!-- Buttons -->
+    <div class="buttons">
+
+        <a href="{{ url_for('queue_status') }}">
+            <button type="button">
+                CHECK QUEUE STATUS
+            </button>
+        </a>
+
+        <a href="{{ url_for('home') }}">
+            <button type="button">
+                BACK TO HOME
+            </button>
+        </a>
+
+    </div>
+
+    <!-- Important Message -->
+    <p class="important">
+        <b>Important:</b>
+        Please be available when your token is called.
+    </p>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    © 2026 Smart Virtual Queue System
+</div>
+
+
+</body>
+
+</html>

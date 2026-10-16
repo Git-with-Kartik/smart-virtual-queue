@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Smart virtual Queue</title>
+    </head>
+    <body bgcolor="#F4F7FB">
+        <table width="100%" bgcolor="#12355B" cellpadding="20">
+            <tr>
+                <td>
+                    <font color="white" size="6"><b>Smart virtual Queue</b></font>
+                    <br>
+                    <font color="white" size="3">Queue Management System</font>
+                </td>
+            </tr>
+        </table>
+        <table width="100%" bgcolor="#DCEBFA" cellpadding="15">
+            <tr align="center">
+                <td><a href="{{ url_for('home') }}">Home</a></td>
+                <td><a href="{{ url_for('select_place') }}">Select Place</a></td>
+                <td><a href="{{ url_for('join_queue') }}">Join Queue</a></td>
+                <td><a href="{{ url_for('queue_status') }}">Queue Status</a></td>
+                <td><a href="{{ url_for('queue_info') }}">Queue Information</a></td>
+                <td><a href="{{ url_for('admin_login') }}">Admin</a></td>
+                <td><a href="{{ url_for('about') }}">About</a></td>
+            </tr>
+        </table>
+        <br><br>
+        <center>
+            <font size="7" color="#12355B">
+                <b>Smart Virtual Queue System</b>
+            </font>
+            <p>
+                <font size="4">
+                    Avoid standing in long physical queues.
+                    Join the queue virtually and wait comfortably.
+                </font>
+            </p>
+            <br>
+            <table cellpadding="15">
+                <tr>
+                    <td>
+                        <a href="{{ url_for('select_place') }}">
+                            <button>SELECT A PLACE</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('queue_status') }}">
+                            <button>CHECK QUEUE STATUS</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </center>
+        
+        <br><br>
+        
+        <center>
+            <h2>How Does It Work?</h2>
+            <table width="80%" border="1" cellpadding="20" cellspacing="0">
+                <tr bgcolor="#12355B">
+                    <th><font color="white">Step</font></th>
+                    <th><font color="white">Process</font></th>
+                    <th><font color="white">Description</font></th>
+                </tr>
+                <tr align="center">
+                    <td><b>1</b></td>
+                    <td>Select Service</td>
+                    <td>Choose the service you require.</td>
+                </tr>
+                <tr align="center">
+                    <td><b>2</b></td>
+                    <td>Enter Details</td>
+                    <td>Provide your basic information.</td>
+                </tr>
+                <tr align="center">
+                    <td><b>3</b></td>
+                    <td>Get Token</td>
+                    <td>Receive your virtual queue token.</td>
+                </tr>
+                <tr align="center">
+                    <td><b>4</b></td>
+                    <td>Track Queue</td>
+                    <td>Check your position in the queue.</td>
+                </tr>
+                <tr align="center">
+                    <td><b>5</b></td>
+                    <td>Visit Counter</td>
+                    <td>Visit the counter when your token is called.</td>
+                </tr>
+            </table>
+        </center>
+        
+        <br><br>
+        <center>
+            <h2>Key Features</h2>
+            <table width="80%" cellpadding="15">
+                <tr align="center">
+                    <td>
+                        <h3>Virtual Token</h3>
+                        <p>Get a token without standing in a physical queue.</p>
+                    </td>
+                    <td>
+                        <h3>Queue Tracking</h3>
+                        <p>Check the current queue and your position.</p>
+                    </td>
+                    <td>
+                        <h3>Multiple Services</h3>
+                        <p>Choose from different available services.</p>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td>
+                        <h3>Priority Queue</h3>
+                        <p>Priority users can be handled separately.</p>
+                    </td>
+                    <td>
+                        <h3>Admin Dashboard</h3>
+                        <p>Administrators can monitor the queue.</p>
+                    </td>
+                    <td>
+                        <h3>Time Saving</h3>
+                        <p>Reduces unnecessary waiting time.</p>
+                    </td>
+                </tr>
+            </table>
+        </center>
+        
+        <br><br>
+        <table width="100%" bgcolor="#12355B" cellpadding="15">
+            <tr>
+                <td align="center">
+                    <font color="white">
+                        © 2026 Smart Virtual Queue System
+                    </font>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
